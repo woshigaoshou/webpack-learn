@@ -19,7 +19,7 @@ const config = {
   entry: path.resolve(__dirname,'./src/index.js'),    // 入口文件
   // entry: path.resolve(__dirname,'./src/main.css'),    // 入口文件
   output: {
-    filename: 'bundle.js',      // 打包后的文件名称
+    filename: 'js/bundle.js',      // 打包后的文件名称
     path: path.resolve(__dirname,'./dist')  // 打包后的目录
   },
   module: {
@@ -34,24 +34,29 @@ const config = {
           'sass-loader'
         ] // use: 对应的loader名称
       },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        use: [
-          'file-loader',
-        ]
-      },
       // {
       //   test: /\.(jpe?g|png|gif)$/i,
-      //   type: 'asset',
-      //   generator: {
-      //     filename: '[name][hash:8][ext]'
-      //   },
-      //   parser: {
-      //     dataUrlCondition: {
-      //       maxSize: 10 * 1024 // 超过100kb不转 base64
-      //     }
-      //   }
-      // }
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: 'img/[name]_[hash:8].[ext]'
+      //       }
+      //     },
+      //   ]
+      // },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'img/[name]_[hash:8][ext]'
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024 // 超过100kb不转 base64
+          }
+        }
+      },
       {
         test: /\.js$/i,
         use: [
@@ -73,7 +78,7 @@ const config = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash:8].css'
+      filename: 'css/[name].[hash:8].css'
     })
 
   ],
