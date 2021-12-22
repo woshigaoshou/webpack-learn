@@ -1,5 +1,6 @@
 import '../css/main.css';
 import '../css/sass.scss';
+import '../iconfont/iconfont.css'
 import logo from '../img/1.png'
 
 
@@ -11,7 +12,7 @@ const dom = document.createElement('span');
 document.body.appendChild(dom);
 
 const img = new Image();
-img.src = logo
+img.src = logo;
 
 console.log(document.getElementById('imgBox'));
 console.log(img);

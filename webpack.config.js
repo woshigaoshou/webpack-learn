@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { DefinePlugin } = require('webpack');
 
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV); // 打印环境变量
@@ -46,6 +47,18 @@ const config = {
       //   ]
       // },
       {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 匹配字体文件
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: 'iconfont/[name][hash:8].[ext]',
+              limit: 10 * 1024      // 超过10k打包到iconfont目录下
+            }
+          }
+        ]
+      },
+      {
         test: /\.(jpe?g|png|gif)$/i,
         type: 'asset',
         generator: {
@@ -57,28 +70,32 @@ const config = {
           }
         }
       },
-      {
-        test: /\.js$/i,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                '@babel/preset-env'
-              ]
-            }
-          }
-        ]
-      }
+      // {
+      //   test: /\.js$/i,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader',
+      //       options: {
+      //         presets: [
+      //           '@babel/preset-env'
+      //         ]
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      title: 'webpack'
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:8].css'
+    }),
+    new DefinePlugin({
+      BASE_URL: "'./'"      // 默认双引号内为变量
     })
 
   ],
