@@ -1,5 +1,18 @@
-body {
+/* body {
   margin: 10px auto;
   background: cyan;
   max-width: 800px;
+} */
+
+body {
+  margin: 10px auto;
+  background: rgba(121, 124, 124, 0.05);
+  max-width: 800px;
+  /* 新增 */
+  font-size: 46px;
+  font-weight: 600;
+  color: black;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
 }
