@@ -16,7 +16,7 @@ const config = {
   //   filename: 'bundle.css',      // 打包后的文件名称
   //   path: path.resolve(__dirname,'./dist')  // 打包后的目录
   // },
-  entry: path.resolve(__dirname,'./src/index.js'),    // 入口文件
+  entry: path.resolve(__dirname,'./src/js/index.js'),    // 入口文件
   // entry: path.resolve(__dirname,'./src/main.css'),    // 入口文件
   output: {
     filename: 'js/bundle.js',      // 打包后的文件名称

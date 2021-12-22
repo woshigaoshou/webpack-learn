@@ -1,6 +1,6 @@
-import './main.css';
-import './sass.scss';
-import logo from '../public/1.png'
+import '../css/main.css';
+import '../css/sass.scss';
+import logo from '../img/1.png'
 
 
 // require('./main.css');
