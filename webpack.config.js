@@ -11,6 +11,7 @@ console.log('process.env.NODE_ENV', process.env.NODE_ENV); // 打印环境变量
 
 const config = {
   mode:'none', // 开发模式
+  devtool: 'source-map',
   // entry: path.resolve(__dirname,'./src/index.js'),    // 入口文件
   // entry: path.resolve(__dirname,'./src/main.css'),    // 入口文件
   // output: {
@@ -50,7 +51,7 @@ const config = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 匹配字体文件
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
               name: 'iconfont/[name][hash:8].[ext]',
               limit: 10 * 1024      // 超过10k打包到iconfont目录下
@@ -70,19 +71,23 @@ const config = {
           }
         }
       },
-      // {
-      //   test: /\.js$/i,
-      //   use: [
-      //     {
-      //       loader: 'babel-loader',
-      //       options: {
-      //         presets: [
-      //           '@babel/preset-env'
-      //         ]
-      //       }
-      //     }
-      //   ]
-      // }
+      {
+        test: /\.js$/i,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              // plugins: [
+              //   '@babel/plugin-transform-arrow-functions',
+              //   '@babel/plugin-transform-block-scoping'
+              // ]
+              presets: [
+                '@babel/preset-env'
+              ]
+            }
+          }
+        ]
+      }
     ]
   },
   plugins: [

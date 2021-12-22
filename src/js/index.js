@@ -3,10 +3,13 @@ import '../css/sass.scss';
 import '../iconfont/iconfont.css'
 import logo from '../img/1.png'
 
+import '../babel_demo.js';
+
 
 // require('./main.css');
 // require('./sass.scss');
 // const logo = require('../public/1.png');
+
 
 const dom = document.createElement('span');
 document.body.appendChild(dom);
@@ -23,13 +26,13 @@ class Author {
   age = 18
   email = 'lxp_work@163.com'
 
-  info =  () => {
-    return {
-      name: this.name,
-      age: this.age,
-      email: this.email
-    }
-  }
+  // info =  () => {
+  //   return {
+  //     name: this.name,
+  //     age: this.age,
+  //     email: this.email
+  //   }
+  // }
 }
 
 
