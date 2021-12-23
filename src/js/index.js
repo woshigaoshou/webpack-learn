@@ -1,6 +1,6 @@
 import '../css/main.css';
 import '../css/sass.scss';
-import '../iconfont/iconfont.css'
+import '../fonts/iconfont.css';
 import logo from '../img/1.png'
 
 import '../babel_demo.js';
@@ -26,16 +26,17 @@ class Author {
   age = 18
   email = 'lxp_work@163.com'
 
-  // info =  () => {
-  //   return {
-  //     name: this.name,
-  //     age: this.age,
-  //     email: this.email
-  //   }
-  // }
+  info =  () => {
+    return {
+      name: this.name,
+      age: this.age,
+      email: this.email
+    }
+  }
 }
 
-
+const author = new Author();
+console.log(author.info());
 // export default Author;
 
 const a = 'Hello webpack';

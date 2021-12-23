@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { DefinePlugin } = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader/dist/index');
 
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV); // 打印环境变量
@@ -18,7 +19,7 @@ const config = {
   //   filename: 'bundle.css',      // 打包后的文件名称
   //   path: path.resolve(__dirname,'./dist')  // 打包后的目录
   // },
-  entry: path.resolve(__dirname,'./src/js/index.js'),    // 入口文件
+  entry: path.resolve(__dirname,'./src/js/main.js'),    // 入口文件
   // entry: path.resolve(__dirname,'./src/main.css'),    // 入口文件
   output: {
     filename: 'js/bundle.js',      // 打包后的文件名称
@@ -48,16 +49,20 @@ const config = {
       //   ]
       // },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 匹配字体文件
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'iconfont/[name][hash:8].[ext]',
-              limit: 10 * 1024      // 超过10k打包到iconfont目录下
-            }
-          }
-        ]
+        test: /\.(woff2?|eot|ttf)$/, // 匹配字体文件
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name]_[hash:8][ext]'
+        },
+        // use: [
+        //   {
+        //     loader: 'file-loader',
+        //     options: {
+        //       name: 'fonts/[name][hash:8].[ext]',
+        //       // limit: 10 * 1024      // 超过10k打包到iconfont目录下
+        //     }
+        //   }
+        // ]
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
@@ -73,20 +78,11 @@ const config = {
       },
       {
         test: /\.js$/i,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              // plugins: [
-              //   '@babel/plugin-transform-arrow-functions',
-              //   '@babel/plugin-transform-block-scoping'
-              // ]
-              presets: [
-                '@babel/preset-env'
-              ]
-            }
-          }
-        ]
+        use: 'babel-loader'
+      },
+      {
+        test: /\.vue$/i,
+        use: 'vue-loader'
       }
     ]
   },
@@ -98,11 +94,11 @@ const config = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:8].css'
-    }),
+    }),   
     new DefinePlugin({
       BASE_URL: "'./'"      // 默认双引号内为变量
-    })
-
+    }),
+    new VueLoaderPlugin()
   ],
   devServer: {
     // contentBase: path.resolve(__dirname, 'public'), // 静态文件目录，本地开发时不需要copy
