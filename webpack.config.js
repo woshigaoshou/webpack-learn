@@ -11,8 +11,10 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index');
 console.log('process.env.NODE_ENV', process.env.NODE_ENV); // 打印环境变量
 
 const config = {
+  target: 'web',
   mode:'none', // 开发模式
   devtool: 'source-map',
+  // watch: true,
   // entry: path.resolve(__dirname,'./src/index.js'),    // 入口文件
   // entry: path.resolve(__dirname,'./src/main.css'),    // 入口文件
   // output: {
@@ -24,6 +26,15 @@ const config = {
   output: {
     filename: 'js/bundle.js',      // 打包后的文件名称
     path: path.resolve(__dirname,'./dist')  // 打包后的目录
+  },
+  devServer: {
+    // contentBase: path.resolve(__dirname, 'public'), // 静态文件目录，本地开发时不需要copy，已废除
+    static: {
+      directory: path.resolve(__dirname, 'public'), // 静态文件目录，本地开发时不需要copy，代替contentBase
+    },
+    // compress: true, // 是否启动压缩gzip
+    port: 8082, // 端口号
+    hot: true,
   },
   module: {
     rules: [  // 转换规则
@@ -96,15 +107,12 @@ const config = {
       filename: 'css/[name].[hash:8].css'
     }),   
     new DefinePlugin({
-      BASE_URL: "'./'"      // 默认双引号内为变量
+      BASE_URL: "'./'",      // 默认双引号内为变量
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false
     }),
     new VueLoaderPlugin()
   ],
-  devServer: {
-    // contentBase: path.resolve(__dirname, 'public'), // 静态文件目录，本地开发时不需要copy
-    // compress: true, // 是否启动压缩gzip
-    port: 8082, // 端口号
-  }
 }
 
 module.exports = (env, argv) => {

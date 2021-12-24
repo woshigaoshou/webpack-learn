@@ -1,6 +1,6 @@
 <template>
   <div>
-    我是vue2渲染出来的
+    我是vue渲染出来的
   </div>
 </template>
 
