@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev webpack serve --mode development",
-    "test": "cross-env NODE_ENV=test webpack --mode production",
-    "build": "cross-env NODE_ENV=prod webpack --mode production"
+    "dev": "cross-env NODE_ENV=dev webpack serve --config ./config/webpack.dev.config.js --mode development",
+    "build": "cross-env NODE_ENV=prod webpack --config ./config/webpack.prod.config.js --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -31,10 +30,12 @@
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
+    "vue": "^3.2.26",
     "vue-loader": "^17.0.0",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0",
+    "webpack-merge": "^5.8.0",
     "webpack-serve": "^4.0.0"
   },
   "dependencies": {},
